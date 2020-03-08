@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    public void send(View w){
+        MessageSender messageSender = new MessageSender();
+        messageSender.execute(input_numbers.getText().toString());
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
