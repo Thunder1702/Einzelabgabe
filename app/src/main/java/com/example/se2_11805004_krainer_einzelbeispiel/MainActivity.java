@@ -11,8 +11,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
+
+    int matrn;
+
+    EditText input_numbers;
+
+    Button btn_abschicken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,17 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        input_numbers = (EditText) findViewById(R.id.input_numbers);
+        btn_abschicken = (Button) findViewById(R.id.btn_abschicken);
+        btn_abschicken.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                matrn = Integer.valueOf(input_numbers.getText().toString());
+
+            }
+        });
+
     }
 
     @Override
