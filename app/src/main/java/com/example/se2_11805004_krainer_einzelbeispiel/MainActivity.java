@@ -13,13 +13,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.io.*;
+import java.net.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    int matrn;
+    String matrn;
+    String ausgabe;
 
     EditText input_numbers;
-
+    TextView ausgabe_view;
     Button btn_abschicken;
 
     @Override
@@ -39,16 +44,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
         input_numbers = (EditText) findViewById(R.id.input_numbers);
+        ausgabe_view = (TextView) findViewById(R.id.textFromServer);
+        ausgabe_view.setText(ausgabe);
+
         btn_abschicken = (Button) findViewById(R.id.btn_abschicken);
         btn_abschicken.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                matrn = Integer.valueOf(input_numbers.getText().toString());
+                matrn = input_numbers.getText().toString();
 
             }
         });
 
+
     }
+    public String getMatrn(){
+        return matrn;
+    }
+    public void setAusgabe(String ausgabe){
+        this.ausgabe = ausgabe;
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
