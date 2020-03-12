@@ -15,13 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.*;
-import java.net.*;
+
 
 public class MainActivity extends AppCompatActivity {
 
     String matrn;
-    String ausgabe;
+    String ausgabe = "Hallo";
 
     EditText input_numbers;
     TextView ausgabe_view;
@@ -34,27 +33,33 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         input_numbers = (EditText) findViewById(R.id.input_numbers);
-        ausgabe_view = (TextView) findViewById(R.id.textFromServer);
-        ausgabe_view.setText(ausgabe);
+
+
+
+
 
         btn_abschicken = (Button) findViewById(R.id.btn_abschicken);
         btn_abschicken.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 matrn = input_numbers.getText().toString();
+                startTransmission();
+                ausgabe_view = (TextView) findViewById(R.id.textFromServer);
+                ausgabe_view.setText(ausgabe);
 
             }
         });
+
+
+    }
+    public void startTransmission(){
+        Client_TCP p = new Client_TCP();
+        Thread t = new Thread(p);
+        p.setTextToServer(matrn);
+        t.start();
+        ausgabe = p.getAntwortVonServer();
 
 
     }
@@ -66,26 +71,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

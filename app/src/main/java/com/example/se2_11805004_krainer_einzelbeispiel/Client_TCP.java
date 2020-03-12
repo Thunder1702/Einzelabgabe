@@ -1,28 +1,38 @@
 package com.example.se2_11805004_krainer_einzelbeispiel;
-
 import java.io.*;
 import java.net.*;
+
 import com.example.se2_11805004_krainer_einzelbeispiel.MainActivity.*;
 
-public class Client_TCP {
-    public static void main(String[] args) throws Exception {
-        MainActivity activity = new MainActivity();
-        String antwortVonServer;
-        String textToServer;
+public class Client_TCP  implements Runnable{
+    String antwortVonServer;
+    String textToServer;
 
-        Socket clientSocket = new Socket("se2-isys.aau.at",53212);
+    @Override
+    public void run() {
 
-        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+        Socket clientSocket = null;
+        DataOutputStream outToServer = null;
+        BufferedReader inFromServer = null;
+        try {
+            clientSocket = new Socket("se2-isys.aau.at",53212);
+            outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            outToServer.writeBytes(textToServer +"\n");
+            antwortVonServer = inFromServer.readLine();
+            System.out.println(antwortVonServer);
+            outToServer.flush();
+            clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        textToServer = activity.getMatrn();
-
-        outToServer.writeBytes(textToServer+'\n');
-
-        antwortVonServer = inFromServer.readLine();
-        activity.setAusgabe(antwortVonServer);
-
-        clientSocket.close();
+    }
+    public void setTextToServer(String text){
+        this.textToServer = text;
+    }
+    public String getAntwortVonServer(){
+        return antwortVonServer;
     }
 
 
