@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.se2_11805004_krainer_einzelbeispiel">
     <uses-permission android:name="android.permission.INTERNET" />
-
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
     </uses-permission>
 
@@ -25,5 +23,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>

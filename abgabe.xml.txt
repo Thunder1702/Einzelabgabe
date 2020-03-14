@@ -1,0 +1,8 @@
+<person>
+        <name>Larissa Krainer</name>
+        <matrikelnummer>11805004</matrikelnummer>
+        <lastcommithash>cdc4b91ee7ee27309dce2d359737b3259cdf2904</lastcommithash>
+        <githubusername>Thunder1702</githubusername>
+        <repositoryname>Einzelabgabe</repositoryname>
+        <repositoryurl>https://github.com/Thunder1702/Einzelabgabe</repositoryurl>
+    </person>

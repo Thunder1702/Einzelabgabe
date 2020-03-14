@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Jede zweite ziffer durch ASCII ersetzen
+                matrn = input_numbers.getText().toString();
                 String berechne = calculate(matrn);
                 berechnen_output.setText(berechne);
             }
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         Thread t = new Thread(p);
         p.setTextToServer(matrn);
         t.start();
+        //Bessere Lösung mit callback.
         try{
             t.join(200);
         }catch (Exception e){
@@ -81,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
         ausgabe = p.getAntwortVonServer();
     }
 
-    public String calculate(String matrn){
-        StringBuffer stringBuffer = new StringBuffer(matrn);
+    public String calculate(String matrikelnummer){
+        StringBuffer stringBuffer = new StringBuffer(matrikelnummer);
         //1 = a;  0 = j;  4 = d;
         for (int i = 1; i<matrn.length();i=i+2){
             if(stringBuffer.charAt(i)=='1'){
