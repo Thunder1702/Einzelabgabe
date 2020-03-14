@@ -7,6 +7,7 @@ import com.example.se2_11805004_krainer_einzelbeispiel.MainActivity.*;
 public class Client_TCP  implements Runnable{
     String antwortVonServer;
     String textToServer;
+    MainActivity a = new MainActivity();
 
     @Override
     public void run() {
@@ -21,6 +22,7 @@ public class Client_TCP  implements Runnable{
             outToServer.writeBytes(textToServer +"\n");
             antwortVonServer = inFromServer.readLine();
             System.out.println(antwortVonServer);
+            setAntwortVonServer(antwortVonServer);
             outToServer.flush();
             clientSocket.close();
         } catch (IOException e) {
@@ -33,6 +35,9 @@ public class Client_TCP  implements Runnable{
     }
     public String getAntwortVonServer(){
         return antwortVonServer;
+    }
+    public void setAntwortVonServer(String ausgabe){
+        this.antwortVonServer = ausgabe;
     }
 
 
