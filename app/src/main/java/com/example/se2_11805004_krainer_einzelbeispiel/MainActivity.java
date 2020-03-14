@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 matrn = input_numbers.getText().toString();
-                ausgabe = startTransmission();
+                startTransmission();
                 System.out.println(ausgabe);
                 backFromServer.setText(ausgabe);
 
@@ -67,12 +67,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public String startTransmission(){
+    public void startTransmission(){
         Client_TCP p = new Client_TCP();
         Thread t = new Thread(p);
         p.setTextToServer(matrn);
         t.start();
-        return p.antwortVonServer;
+        try{
+            t.join(200);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        ausgabe = p.getAntwortVonServer();
     }
 
     public String calculate(String matrn){
@@ -86,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
             }else if(stringBuffer.charAt(i)=='4'){
                 stringBuffer.setCharAt(i,'d');
             }
-            System.out.println(stringBuffer.charAt(i));
         }
         String neu = stringBuffer.toString();
 

@@ -2,12 +2,10 @@ package com.example.se2_11805004_krainer_einzelbeispiel;
 import java.io.*;
 import java.net.*;
 
-import com.example.se2_11805004_krainer_einzelbeispiel.MainActivity.*;
 
 public class Client_TCP  implements Runnable{
     String antwortVonServer;
     String textToServer;
-    MainActivity a = new MainActivity();
 
     @Override
     public void run() {
